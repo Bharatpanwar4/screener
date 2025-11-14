@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { signUpWithEmail } from "@/lib/actions/auth-actions";
 import {
   INVESTMENT_GOALS,
   PREFERRED_INDUSTRIES,
@@ -11,6 +12,7 @@ import InputField from "@/src/common/forms/InputField";
 import SelectField from "@/src/common/forms/SelectField";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const SignUpPage = () => {
   const router = useRouter();
@@ -32,26 +34,24 @@ const SignUpPage = () => {
     mode: "onBlur",
   });
 
-  const onSubmit = (data: SignUpFormData) => {
+  const onSubmit = async (data: SignUpFormData) => {
     try {
-      console.log("data", data);
-
-      // const result = await signUpWithEmail(data);
-      // if(result.success) router.push('/');
+      const result = await signUpWithEmail(data);
+      if (result.success) router.push("/");
     } catch (e) {
       console.error(e);
-      console.log("error", e);
-
-      // toast.error('Sign up failed', {
-      //     description: e instanceof Error ? e.message : 'Failed to create an account.'
-      // })
+      toast.error("Sign up failed", {
+        description:
+          e instanceof Error ? e.message : "Failed to create an account.",
+      });
     }
   };
+
   return (
     <>
       <h1 className="form-title">Sign Up & Personalize</h1>
 
-      <form action="" onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         <InputField
           name="fullName"
           label="Full Name"
