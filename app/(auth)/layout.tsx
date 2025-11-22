@@ -19,7 +19,7 @@ const Layout = async ({
         <Link href="/" className="auth-logo">
           <Image
             src="/assets/icons/logo.svg"
-            alt="Signalist logo"
+            alt="screener logo"
             width={140}
             height={32}
             className="h-8 w-auto"
