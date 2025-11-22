@@ -135,6 +135,7 @@ export default function SearchCommand({
                       company={stock.name}
                       isInWatchlist={stock.isInWatchlist}
                       onWatchlistChange={handleWatchlistChange}
+                      type="icon"
                     />
                   </Link>
                 </li>
